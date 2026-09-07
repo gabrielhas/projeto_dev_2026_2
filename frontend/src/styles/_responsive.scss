@@ -1,0 +1,99 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// Reset e salvaguardas globais contra overflow
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: $font-family-base;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+// Garante touch target confortável em dispositivos móveis
+button, .btn, .nav-link, input, select, textarea {
+  min-height: $touch-target-min;
+  touch-action: manipulation;
+}
+
+// Botões com área de clique aprimorada
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  border-radius: $border-radius-md;
+  transition: all $transition-speed-normal $transition-ease;
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Títulos e Tipografia Fluida
+h1, h2, h3, h4, h5, h6, .brand-font {
+  font-family: $font-family-heading;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(1.85rem, 4vw + 1rem, 3.25rem);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 2.5vw + 0.8rem, 2.2rem);
+  font-weight: 700;
+}
+
+// Espaçamentos de Container Adaptativos
+.container-custom {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include sm {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @include lg {
+    max-width: 1140px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @include xl {
+    max-width: 1280px;
+  }
+}
+
+// Gradientes decorativos de fundo
+.bg-mesh {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--mesh-opacity);
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(236, 72, 153, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.04) 0%, transparent 50%);
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

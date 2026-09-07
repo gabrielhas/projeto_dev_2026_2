@@ -1,0 +1,79 @@
+// ==========================================
+// Main SCSS Entry Point
+// ==========================================
+
+// 1. All @use rules must come first in Dart Sass
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'responsive';
+@use 'components/header';
+@use 'components/form';
+@use 'components/dashboard';
+@use 'components/cards';
+@use 'components/table';
+
+// 2. Import external CSS frameworks
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+// 3. Global Utilities & Modal Backdrop
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, $color-primary, $color-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.empty-state-box {
+  @include flex-center;
+  flex-direction: column;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: $color-text-muted;
+
+  i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: $color-text-subtle;
+  }
+}
+
+// Modal Backdrop escuro com blur
+.modal-backdrop-custom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 1050;
+  @include flex-center;
+  padding: 1rem;
+}
+
+.modal-content-custom {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  border-radius: $border-radius-lg;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  animation: modalFadeIn 0.2s ease-out;
+  color: var(--text-primary);
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,69 @@
+@use 'variables' as *;
+
+// Mixins Responsivos (Mobile First)
+@mixin sm {
+  @media (min-width: $bp-sm) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: $bp-md) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: $bp-lg) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: $bp-xl) {
+    @content;
+  }
+}
+
+@mixin xxl {
+  @media (min-width: $bp-xxl) {
+    @content;
+  }
+}
+
+// Media query para dispositivos ultra pequenos (ex: 320px)
+@mixin xs-only {
+  @media (max-width: #{$bp-sm - 1px}) {
+    @content;
+  }
+}
+
+// Efeito Glassmorphism & Clean Surface
+@mixin glass-card($blur: 16px, $bg: var(--bg-surface), $border: var(--border-color)) {
+  background: $bg;
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid $border;
+  border-radius: $border-radius-lg;
+  box-shadow: var(--card-shadow);
+}
+
+// Centralização Flex
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Truncamento Seguro de Texto
+@mixin truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

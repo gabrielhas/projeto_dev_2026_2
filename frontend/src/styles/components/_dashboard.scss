@@ -1,0 +1,189 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.dashboard-header {
+  padding: 1.5rem 0 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.75rem;
+
+  .dashboard-title-area {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    @include sm {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    h1 {
+      color: var(--text-primary);
+      margin-bottom: 0;
+      font-size: 1.85rem;
+      font-weight: 800;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+  }
+}
+
+// Filtros e Barra de Ações Responsiva (Clean Design)
+.dashboard-filter-bar {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
+  border-radius: $border-radius-lg;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+
+  @include lg {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .search-input-group {
+    flex: 1;
+    position: relative;
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    input {
+      width: 100%;
+      padding-left: 2.75rem;
+      padding-right: 2.5rem;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: $border-radius-md;
+      height: 42px;
+      font-size: 0.92rem;
+      transition: all 0.2s ease;
+
+      &::placeholder {
+        color: var(--text-muted);
+      }
+
+      &:focus {
+        border-color: $color-primary;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+      }
+    }
+
+    .clear-search-btn {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      @include flex-center;
+
+      &:hover {
+        color: var(--text-primary);
+      }
+    }
+  }
+
+  .filter-controls-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .platform-select-clean {
+    height: 42px;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: $border-radius-md;
+    padding: 0 2rem 0 0.85rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: 140px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    transition: all 0.2s ease;
+
+    &:focus {
+      border-color: $color-primary;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    }
+  }
+
+  .filter-status-pills {
+    display: flex;
+    gap: 0.4rem;
+    overflow-x: auto;
+    padding-bottom: 0.2rem;
+
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .btn-pill {
+      white-space: nowrap;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      border: 1px solid var(--pill-border);
+      background: var(--pill-bg);
+      color: var(--pill-text);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+
+      .pill-badge {
+        font-size: 0.75rem;
+        padding: 0.1rem 0.45rem;
+        border-radius: 9999px;
+        background: rgba(0, 0, 0, 0.08);
+      }
+
+      &:hover {
+        background: var(--border-color);
+        color: var(--text-primary);
+      }
+
+      &.active {
+        background: $color-primary;
+        border-color: $color-primary;
+        color: #ffffff;
+
+        .pill-badge {
+          background: rgba(255, 255, 255, 0.25);
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Documentacao Tecnica - Sistema de Solicitacao de Jogos (MuPy 2026)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+:root{--primary:#4f46e5;--primary-light:#e0e7ff;--secondary:#0ea5e9;--accent:#7c3aed;--success:#059669;--warning:#d97706;--danger:#dc2626;--bg:#ffffff;--bg-alt:#f8fafc;--bg-card:#ffffff;--border:#e2e8f0;--text:#0f172a;--text-muted:#64748b;--code-bg:#1e293b;--code-text:#e2e8f0;--shadow:0 1px 3px rgba(0,0,0,0.1);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;font-size:14px;color:var(--text);background:var(--bg);line-height:1.7;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.cover{min-height:100vh;background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 50%,#0ea5e9 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 40px;page-break-after:always;color:white;}
+.cover-badge{display:inline-block;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);border-radius:100px;padding:6px 20px;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:32px;}
+.cover h1{font-size:42px;font-weight:700;line-height:1.2;margin-bottom:16px;}
+.cover .subtitle{font-size:18px;opacity:0.85;margin-bottom:48px;font-weight:300;}
+.cover-info{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;}
+.cover-info-item{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:12px;padding:20px 30px;}
+.cover-info-item .label{font-size:11px;opacity:0.7;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+.cover-info-item .value{font-size:16px;font-weight:600;}
+.content{max-width:900px;margin:0 auto;padding:60px;}
+.section{margin-bottom:60px;}
+.section-header{display:flex;align-items:center;gap:16px;margin-bottom:32px;padding-bottom:16px;border-bottom:2px solid var(--border);}
+.section-number{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent));color:white;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.section-header h2{font-size:24px;font-weight:700;}
+h3{font-size:17px;font-weight:600;color:var(--primary);margin:28px 0 12px;display:flex;align-items:center;gap:8px;}
+h3::before{content:'';display:inline-block;width:4px;height:18px;background:var(--primary);border-radius:2px;}
+h4{font-size:14px;font-weight:600;margin:20px 0 8px;}
+p{color:var(--text-muted);margin-bottom:12px;line-height:1.75;}
+ul,ol{padding-left:20px;margin-bottom:16px;}
+li{color:var(--text-muted);margin-bottom:6px;}
+li strong{color:var(--text);}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:var(--shadow);}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.card-icon{font-size:20px;}
+.card-title{font-size:15px;font-weight:600;}
+.card-badge{font-size:10px;font-weight:600;padding:3px 10px;border-radius:100px;text-transform:uppercase;}
+.badge-green{background:#d1fae5;color:#065f46;}
+.badge-blue{background:#dbeafe;color:#1e40af;}
+.badge-purple{background:#ede9fe;color:#5b21b6;}
+.badge-orange{background:#ffedd5;color:#9a3412;}
+.badge-red{background:#fee2e2;color:#991b1b;}
+.badge-gray{background:#f1f5f9;color:#475569;}
+pre{background:var(--code-bg);color:var(--code-text);padding:20px 24px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.6;overflow-x:auto;margin:12px 0 20px;border:1px solid #334155;}
+code{font-family:'JetBrains Mono',monospace;font-size:12px;background:#f1f5f9;color:#7c3aed;padding:2px 6px;border-radius:4px;}
+pre code{background:transparent;color:var(--code-text);padding:0;}
+.comment{color:#64748b;}
+.keyword{color:#93c5fd;}
+.string-c{color:#86efac;}
+table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:13px;border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+thead tr{background:linear-gradient(135deg,var(--primary),var(--accent));color:white;}
+th{padding:12px 16px;text-align:left;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;}
+td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--text-muted);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:nth-child(even) td{background:var(--bg-alt);}
+td code{background:var(--primary-light);color:var(--primary);}
+.alert{padding:16px 20px;border-radius:10px;margin:16px 0;display:flex;gap:12px;align-items:flex-start;}
+.alert-icon{font-size:18px;flex-shrink:0;}
+.alert-content{flex:1;}
+.alert-title{font-weight:600;font-size:13px;margin-bottom:4px;}
+.alert-text{font-size:13px;line-height:1.5;}
+.alert-info{background:#eff6ff;border-left:4px solid #3b82f6;}
+.alert-info .alert-title{color:#1d4ed8;}
+.alert-info .alert-text{color:#1e40af;}
+.alert-success{background:#f0fdf4;border-left:4px solid #22c55e;}
+.alert-success .alert-title{color:#15803d;}
+.alert-success .alert-text{color:#166534;}
+.alert-warning{background:#fffbeb;border-left:4px solid #f59e0b;}
+.alert-warning .alert-title{color:#b45309;}
+.alert-warning .alert-text{color:#92400e;}
+.arch-diagram{background:var(--bg-alt);border:1px solid var(--border);border-radius:12px;padding:32px;margin:20px 0;text-align:center;}
+.arch-row{display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;margin:12px 0;}
+.arch-box{background:white;border:2px solid var(--border);border-radius:10px;padding:14px 22px;font-size:13px;font-weight:600;min-width:120px;text-align:center;box-shadow:var(--shadow);}
+.arch-box.primary{border-color:var(--primary);background:var(--primary-light);color:var(--primary);}
+.arch-box.secondary{border-color:var(--secondary);background:#e0f2fe;color:#0369a1;}
+.arch-box.accent{border-color:var(--accent);background:#ede9fe;color:#5b21b6;}
+.arch-box.success{border-color:var(--success);background:#d1fae5;color:#065f46;}
+.arch-arrow{font-size:20px;color:var(--text-muted);}
+.arch-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin:8px 0;}
+.file-tree{background:var(--code-bg);border-radius:10px;padding:24px;margin:16px 0;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.9;white-space:pre;}
+.file-tree .folder{color:#93c5fd;font-weight:500;}
+.file-tree .file-ts{color:#fbbf24;}
+.file-tree .file-scss{color:#f472b6;}
+.file-tree .file-sql{color:#4ade80;}
+.file-tree .file-json{color:#fb923c;}
+.file-tree .file-env{color:#a78bfa;}
+.file-tree .cmt{color:#64748b;font-style:italic;}
+.file-tree .f{color:#e2e8f0;}
+.endpoint{display:flex;align-items:flex-start;gap:12px;padding:16px;background:var(--bg-alt);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;}
+.method{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;min-width:60px;text-align:center;flex-shrink:0;}
+.method-get{background:#d1fae5;color:#065f46;}
+.method-post{background:#dbeafe;color:#1e40af;}
+.method-patch{background:#ffedd5;color:#9a3412;}
+.method-delete{background:#fee2e2;color:#991b1b;}
+.endpoint-path{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;margin-bottom:4px;}
+.endpoint-desc{font-size:12px;color:var(--text-muted);}
+.endpoint-auth{margin-left:auto;font-size:10px;padding:3px 8px;border-radius:100px;font-weight:600;flex-shrink:0;}
+.auth-required{background:#fef3c7;color:#92400e;}
+.auth-public{background:#d1fae5;color:#065f46;}
+.flow{display:flex;flex-direction:column;gap:0;margin:16px 0;}
+.flow-step{display:flex;gap:16px;align-items:flex-start;}
+.flow-step-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+.flow-step-num{width:32px;height:32px;border-radius:50%;background:var(--primary);color:white;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;}
+.flow-step-line{width:2px;flex:1;background:var(--border);min-height:24px;margin:4px 0;}
+.flow-step-content{padding:4px 0 24px;}
+.flow-step-title{font-weight:600;font-size:13px;margin-bottom:4px;}
+.flow-step-desc{font-size:12.5px;color:var(--text-muted);line-height:1.6;}
+.divider{border:none;border-top:1px solid var(--border);margin:40px 0;}
+.page-break{page-break-before:always;}
+@media print{
+  body{font-size:12px;}
+  .cover{page-break-after:always;}
+  .section{page-break-inside:avoid;}
+  .card{page-break-inside:avoid;}
+  .no-print{display:none;}
+  @page{margin:20mm 20mm;size:A4;}
+  .content{padding:0;max-width:100%;}
+}
+.print-btn{position:fixed;bottom:30px;right:30px;background:linear-gradient(135deg,var(--primary),var(--accent));color:white;border:none;border-radius:50px;padding:14px 28px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(79,70,229,0.4);font-family:'Inter',sans-serif;display:flex;align-items:center;gap:8px;z-index:9999;transition:transform 0.2s;}
+.print-btn:hover{transform:translateY(-2px);}
+.doc-footer{margin-top:60px;padding:40px 60px;background:var(--bg-alt);border-top:1px solid var(--border);text-align:center;color:var(--text-muted);font-size:12px;}
+</style>
+</head>
+<body>
+<button class="print-btn no-print" onclick="window.print()">Salvar como PDF</button>
+<div class="cover">
+<div class="cover-badge">Documentacao Tecnica Completa</div>
+<h1>Sistema de Solicitacao<br>de Jogos</h1>
+<p class="subtitle">Documentacao completa da arquitetura, estrutura de pastas,<br>arquivos, funcoes e fluxo de funcionamento do projeto</p>
+<div class="cover-info">
+<div class="cover-info-item"><div class="label">Projeto</div><div class="value">projeto_dev_2026_2</div></div>
+<div class="cover-info-item"><div class="label">Versao</div><div class="value">1.0.0 - 2026</div></div>
+<div class="cover-info-item"><div class="label">Stack</div><div class="value">React + Node.js + MySQL</div></div>
+<div class="cover-info-item"><div class="label">Evento</div><div class="value">MuPy 2026</div></div>
+</div>
+</div>
+<div class="content">
+<div class="section" id="s1">
+<div class="section-header"><div class="section-number">1</div><h2>Visao Geral do Projeto</h2></div>
+<p>O <strong>Sistema de Solicitacao de Jogos</strong> e uma aplicacao web fullstack desenvolvida para o evento <strong>MuPy 2026</strong>. Permite que usuarios comuns enviem solicitacoes de jogos para plataformas especificas (PS4, PS5, Xbox Series e Nintendo), enquanto administradores gerenciam essas solicitacoes por um painel protegido.</p>
+<h3>1.1 Arquitetura do Sistema</h3>
+<p>O projeto segue uma arquitetura <strong>monorepo</strong> com separacao clara entre frontend e backend, comunicando-se via API REST sobre HTTP.</p>
+<div class="arch-diagram">
+<div class="arch-label">Usuario / Navegador</div>
+<div class="arch-row">
+<div class="arch-box primary">Usuario Publico<br><small style="font-weight:400">Envia solicitacoes</small></div>
+<div class="arch-box accent">Admin<br><small style="font-weight:400">Gerencia o painel</small></div>
+</div>
+<div class="arch-row"><div class="arch-arrow">HTTP / REST API</div></div>
+<div class="arch-row"><div class="arch-box secondary">Backend<br><small style="font-weight:400">Node.js + Express (Porta 3001)</small></div></div>
+<div class="arch-row"><div class="arch-arrow">mysql2 / Pool de Conexoes</div></div>
+<div class="arch-row"><div class="arch-box success">MySQL<br><small style="font-weight:400">Banco game_requests (Porta 3306)</small></div></div>
+</div>
+<div class="alert alert-info"><div class="alert-icon">i</div><div class="alert-content"><div class="alert-title">Ambiente de Desenvolvimento</div><div class="alert-text">Frontend Vite: porta <strong>5173</strong> | Backend Express: porta <strong>3001</strong> | MySQL (XAMPP/Workbench): porta <strong>3306</strong></div></div></div>
+<h3>1.2 Tecnologias Utilizadas</h3>
+<table>
+<thead><tr><th>Camada</th><th>Tecnologia</th><th>Versao</th><th>Finalidade</th></tr></thead>
+<tbody>
+<tr><td><strong>Frontend</strong></td><td>React</td><td>^18</td><td>Interface de usuario com componentes reutilizaveis</td></tr>
+<tr><td><strong>Frontend</strong></td><td>TypeScript</td><td>^5</td><td>Tipagem estatica para seguranca e manutencao</td></tr>
+<tr><td><strong>Frontend</strong></td><td>Vite</td><td>^6</td><td>Build tool ultrarrapida para desenvolvimento</td></tr>
+<tr><td><strong>Frontend</strong></td><td>React Router DOM</td><td>^6</td><td>Navegacao entre paginas (SPA)</td></tr>
+<tr><td><strong>Frontend</strong></td><td>Axios</td><td>^1</td><td>Client HTTP para chamadas a API</td></tr>
+<tr><td><strong>Frontend</strong></td><td>SCSS (Sass)</td><td>^1</td><td>Pre-processador CSS com variaveis e aninhamento</td></tr>
+<tr><td><strong>Frontend</strong></td><td>Bootstrap Icons</td><td>^1</td><td>Biblioteca de icones SVG</td></tr>
+<tr><td><strong>Backend</strong></td><td>Node.js</td><td>^20</td><td>Runtime JavaScript no servidor</td></tr>
+<tr><td><strong>Backend</strong></td><td>Express</td><td>^4</td><td>Framework web minimalista para APIs REST</td></tr>
+<tr><td><strong>Backend</strong></td><td>TypeScript</td><td>^5</td><td>Tipagem estatica no servidor</td></tr>
+<tr><td><strong>Backend</strong></td><td>mysql2</td><td>^3</td><td>Driver MySQL com suporte a Promises</td></tr>
+<tr><td><strong>Backend</strong></td><td>bcrypt</td><td>^5</td><td>Hash seguro de senhas</td></tr>
+<tr><td><strong>Backend</strong></td><td>jsonwebtoken</td><td>^9</td><td>Autenticacao via tokens JWT</td></tr>
+<tr><td><strong>Backend</strong></td><td>helmet</td><td>^8</td><td>Headers de seguranca HTTP</td></tr>
+<tr><td><strong>Backend</strong></td><td>cors</td><td>^2</td><td>Politica de CORS entre frontend e backend</td></tr>
+<tr><td><strong>Backend</strong></td><td>express-rate-limit</td><td>^7</td><td>Protecao contra forca bruta e spam</td></tr>
+<tr><td><strong>Banco de Dados</strong></td><td>MySQL</td><td>8.x</td><td>Banco relacional para persistencia dos dados</td></tr>
+</tbody>
+</table>
+</div>
+<hr class="divider"/>
+<div class="section page-break" id="s2">
+<div class="section-header"><div class="section-number">2</div><h2>Estrutura de Pastas e Arquivos</h2></div>
+<h3>2.1 Arvore Completa do Projeto</h3>
+<div class="file-tree"><span class="folder">projeto_dev_2026_2/</span>                    <span class="cmt">Raiz do monorepo</span>
++-- <span class="file-json">package.json</span>                         <span class="cmt">Scripts globais (dev, build, test)</span>
++-- <span class="f">README.md</span>                            <span class="cmt">Guia de instalacao e uso</span>
++-- <span class="f">DECISOES.md</span>                          <span class="cmt">Registro de decisoes de arquitetura</span>
++-- <span class="f">.gitignore</span>                           <span class="cmt">Arquivos ignorados pelo Git</span>
++-- <span class="folder">database/</span>                            <span class="cmt">Arquivos SQL do banco de dados</span>
+|   +-- <span class="file-sql">schema.sql</span>                       <span class="cmt">DDL: criacao do banco e tabelas</span>
+|   +-- <span class="file-sql">seed.sql</span>                         <span class="cmt">DML: dados iniciais e de exemplo</span>
++-- <span class="folder">backend/</span>                             <span class="cmt">API REST Node.js</span>
+|   +-- <span class="file-env">.env</span>                             <span class="cmt">Variaveis de ambiente</span>
+|   +-- <span class="file-json">package.json</span>                     <span class="cmt">Dependencias e scripts do backend</span>
+|   +-- <span class="file-json">tsconfig.json</span>                    <span class="cmt">Configuracao TypeScript do backend</span>
+|   +-- <span class="folder">src/</span>                             <span class="cmt">Codigo-fonte do backend</span>
+|       +-- <span class="file-ts">server.ts</span>                    <span class="cmt">Ponto de entrada: inicializa o servidor</span>
+|       +-- <span class="file-ts">app.ts</span>                       <span class="cmt">Configuracao do Express e middlewares</span>
+|       +-- <span class="folder">config/</span>                      <span class="cmt">Configuracoes globais</span>
+|       |   +-- <span class="file-ts">database.ts</span>              <span class="cmt">Pool de conexao MySQL + init automatico</span>
+|       +-- <span class="folder">models/</span>                      <span class="cmt">Camada de dados (queries SQL)</span>
+|       |   +-- <span class="file-ts">adminModel.ts</span>            <span class="cmt">CRUD de administradores</span>
+|       |   +-- <span class="file-ts">requestModel.ts</span>          <span class="cmt">CRUD de solicitacoes de jogos</span>
+|       +-- <span class="folder">controllers/</span>                 <span class="cmt">Logica de negocio dos endpoints</span>
+|       |   +-- <span class="file-ts">authController.ts</span>        <span class="cmt">Login, logout, perfil, senha</span>
+|       |   +-- <span class="file-ts">adminController.ts</span>       <span class="cmt">CRUD de admins via API</span>
+|       |   +-- <span class="file-ts">requestController.ts</span>     <span class="cmt">CRUD de solicitacoes via API</span>
+|       +-- <span class="folder">routes/</span>                      <span class="cmt">Definicao das rotas HTTP</span>
+|       |   +-- <span class="file-ts">authRoutes.ts</span>            <span class="cmt">/api/auth/*</span>
+|       |   +-- <span class="file-ts">adminRoutes.ts</span>           <span class="cmt">/api/admins/*</span>
+|       |   +-- <span class="file-ts">requestRoutes.ts</span>         <span class="cmt">/api/requests/*</span>
+|       +-- <span class="folder">middleware/</span>                  <span class="cmt">Interceptadores de requisicao</span>
+|       |   +-- <span class="file-ts">authMiddleware.ts</span>        <span class="cmt">Validacao de JWT</span>
+|       |   +-- <span class="file-ts">errorMiddleware.ts</span>       <span class="cmt">Tratamento global de erros</span>
+|       |   +-- <span class="file-ts">rateLimit.ts</span>             <span class="cmt">Limitadores de taxa (anti-brute force)</span>
+|       +-- <span class="folder">utils/</span>                       <span class="cmt">Utilitarios e validadores</span>
+|       |   +-- <span class="file-ts">validators.ts</span>            <span class="cmt">Funcoes de validacao de entrada</span>
+|       +-- <span class="folder">scripts/</span>                     <span class="cmt">Scripts avulsos</span>
+|           +-- <span class="file-ts">seedAdmin.ts</span>             <span class="cmt">Cria admin padrao manualmente</span>
+|           +-- <span class="file-ts">setupDatabase.ts</span>         <span class="cmt">Setup completo via Node.js</span>
++-- <span class="folder">frontend/</span>                            <span class="cmt">Aplicacao React</span>
+    +-- <span class="file-json">package.json</span>                     <span class="cmt">Dependencias e scripts do frontend</span>
+    +-- <span class="file-json">vite.config.ts</span>                   <span class="cmt">Configuracao do Vite</span>
+    +-- <span class="file-json">tsconfig.json</span>                    <span class="cmt">Configuracao TypeScript do frontend</span>
+    +-- <span class="f">index.html</span>                       <span class="cmt">HTML raiz (entry point do Vite)</span>
+    +-- <span class="folder">src/</span>                             <span class="cmt">Codigo-fonte do frontend</span>
+        +-- <span class="file-ts">main.tsx</span>                     <span class="cmt">Ponto de entrada React</span>
+        +-- <span class="file-ts">App.tsx</span>                      <span class="cmt">Configuracao de rotas e providers</span>
+        +-- <span class="folder">context/</span>                     <span class="cmt">Estado global</span>
+        |   +-- <span class="file-ts">AuthContext.tsx</span>          <span class="cmt">Estado de autenticacao</span>
+        |   +-- <span class="file-ts">ThemeContext.tsx</span>         <span class="cmt">Alternancia de tema claro/escuro</span>
+        +-- <span class="folder">pages/</span>                       <span class="cmt">Paginas da aplicacao</span>
+        |   +-- <span class="file-ts">Home.tsx</span>                 <span class="cmt">Pagina publica com formulario</span>
+        |   +-- <span class="file-ts">Login.tsx</span>                <span class="cmt">Login administrativo</span>
+        |   +-- <span class="file-ts">Dashboard.tsx</span>            <span class="cmt">Painel de solicitacoes (admin)</span>
+        |   +-- <span class="file-ts">RequestDetails.tsx</span>       <span class="cmt">Detalhes de uma solicitacao</span>
+        |   +-- <span class="file-ts">AdminsManagement.tsx</span>     <span class="cmt">Gerenciamento de administradores</span>
+        |   +-- <span class="file-ts">MyAccount.tsx</span>            <span class="cmt">Dados do perfil do admin logado</span>
+        |   +-- <span class="file-ts">NotFound.tsx</span>             <span class="cmt">Pagina 404</span>
+        +-- <span class="folder">components/</span>                  <span class="cmt">Componentes reutilizaveis</span>
+        |   +-- <span class="file-ts">Header.tsx</span>               <span class="cmt">Cabecalho com navegacao e tema</span>
+        |   +-- <span class="file-ts">Footer.tsx</span>               <span class="cmt">Rodape</span>
+        |   +-- <span class="file-ts">RequestForm.tsx</span>          <span class="cmt">Formulario de envio de solicitacao</span>
+        |   +-- <span class="file-ts">StatusBadge.tsx</span>          <span class="cmt">Badge visual de status</span>
+        |   +-- <span class="file-ts">Pagination.tsx</span>           <span class="cmt">Componente de paginacao</span>
+        |   +-- <span class="file-ts">ConfirmModal.tsx</span>         <span class="cmt">Modal de confirmacao de acao</span>
+        |   +-- <span class="file-ts">Alert.tsx</span>                <span class="cmt">Alerta de feedback para o usuario</span>
+        |   +-- <span class="file-ts">Loading.tsx</span>              <span class="cmt">Indicador de carregamento</span>
+        |   +-- <span class="file-ts">ProtectedRoute.tsx</span>       <span class="cmt">Guarda de rota autenticada</span>
+        +-- <span class="folder">services/</span>                    <span class="cmt">Funcoes de chamada a API</span>
+        |   +-- <span class="file-ts">api.ts</span>                   <span class="cmt">Instancia base do Axios</span>
+        |   +-- <span class="file-ts">authService.ts</span>           <span class="cmt">Calls de autenticacao</span>
+        |   +-- <span class="file-ts">requestService.ts</span>        <span class="cmt">Calls de solicitacoes</span>
+        |   +-- <span class="file-ts">adminService.ts</span>          <span class="cmt">Calls de administradores</span>
+        +-- <span class="folder">styles/</span>                      <span class="cmt">Estilos SCSS globais</span>
+            +-- <span class="file-scss">main.scss</span>                <span class="cmt">Importa todos os modulos SCSS</span>
+            +-- <span class="file-scss">_variables.scss</span>          <span class="cmt">Tokens de design (cores, fontes)</span>
+            +-- <span class="file-scss">_mixins.scss</span>             <span class="cmt">Mixins utilitarios reutilizaveis</span>
+            +-- <span class="file-scss">_responsive.scss</span>         <span class="cmt">Transicoes de tema e responsividade</span>
+            +-- <span class="folder">components/</span>              <span class="cmt">SCSS de cada componente</span></div>
+</div>
+<hr class="divider"/>

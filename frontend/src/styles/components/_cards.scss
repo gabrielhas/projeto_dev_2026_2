@@ -1,0 +1,138 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// Grid de KPIs: 1 col mobile, 2 ou 3 tablet, 5 desktop
+.kpi-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  @include sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include lg {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.kpi-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-lg;
+  box-shadow: var(--card-shadow);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .kpi-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: $border-radius-md;
+    @include flex-center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+
+    &.total {
+      background: rgba(99, 102, 241, 0.12);
+      color: $color-primary;
+    }
+
+    &.pending {
+      background: $color-pending-bg;
+      color: $color-pending;
+    }
+
+    &.approved {
+      background: $color-approved-bg;
+      color: $color-approved;
+    }
+
+    &.rejected {
+      background: $color-rejected-bg;
+      color: $color-rejected;
+    }
+
+    &.completed {
+      background: $color-completed-bg;
+      color: $color-completed;
+    }
+  }
+
+  .kpi-content {
+    .kpi-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.2rem;
+    }
+
+    .kpi-number {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+  }
+}
+
+// Cards de Solicitação para Mobile
+.mobile-request-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
+  border-radius: $border-radius-md;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+
+  .card-top-row {
+    @include flex-between;
+    gap: 0.5rem;
+
+    .game-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      @include truncate-text;
+    }
+  }
+
+  .card-meta {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  .card-actions-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-subtle);
+
+    .btn {
+      flex: 1;
+      font-size: 0.85rem;
+      padding: 0.5rem;
+    }
+  }
+}

@@ -1,0 +1,122 @@
+@use 'sass:color';
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.form-card-wrapper {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-xl;
+  box-shadow: var(--card-shadow);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.25s ease;
+
+  @include sm {
+    padding: 2.25rem;
+  }
+
+  @include md {
+    padding: 2.5rem;
+  }
+}
+
+.custom-form-group {
+  margin-bottom: 1.25rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.92rem;
+
+    .required-star {
+      color: $color-secondary;
+      margin-left: 3px;
+    }
+  }
+
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      pointer-events: none;
+      transition: color $transition-speed-fast $transition-ease;
+    }
+
+    .form-control-custom {
+      width: 100%;
+      height: 48px;
+      padding: 0.75rem 1rem 0.75rem 2.85rem;
+      background-color: var(--bg-input);
+      border: 1.5px solid var(--border-color);
+      border-radius: $border-radius-md;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      transition: all $transition-speed-normal $transition-ease;
+
+      &::placeholder {
+        color: var(--text-muted);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: $color-primary;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+        background-color: var(--bg-surface);
+
+        + .input-icon {
+          color: $color-primary;
+        }
+      }
+
+      &.is-invalid {
+        border-color: $color-rejected;
+        box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+      }
+    }
+  }
+
+  .field-error-msg {
+    color: #ef4444;
+    font-size: 0.82rem;
+    margin-top: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+}
+
+.btn-submit-action {
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(135deg, $color-primary, $color-secondary);
+  color: #ffffff;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: $border-radius-md;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(
+      135deg,
+      color.adjust($color-primary, $lightness: 5%),
+      color.adjust($color-secondary, $lightness: 5%)
+    );
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45);
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+}
