@@ -47,3 +47,19 @@ Este documento registra as principais decisões tomadas durante o planejamento e
    - Em dispositivos móveis: transformação dinâmica em **cards individuais** (`.mobile-request-card`), proporcionando uma experiência de toque natural em smartphones.
    - Grid de KPIs adaptativo (1 coluna em `<576px`, 2 colunas em `576px-991px`, 5 colunas em `>=992px`).
    - Touch targets de no mínimo 44px e acessibilidade visual com ícones e textos para os status e plataformas.
+
+## Sobre o Uso da IA
+
+### O que você delegou para a IA e o que fez à mão, e por quê
+
+Deleguei para a IA a estruturação inicial do projeto, a criação dos arquivos base de frontend e backend, a implementação das rotas, controllers, models e validações. O principal motivo foi economizar tempo na configuração inicial e garantir que a arquitetura seguisse as melhores práticas.
+
+A primeira coisa importante é que eu tinha um objetivo bem claro de usar TypeScript, React, Vite, Node.js com Express e MySQL, pois são tecnologias que eu conheço e já utilizei anteriormente em outros projetos meus. Eu também queria que o projeto tivesse uma arquitetura limpa, com separação de responsabilidades entre controllers, models, validações e middlewares. Além disso, eu queria que o projeto fosse escalável e que tivesse uma boa experiência de usuário, com design moderno e responsivo.
+
+### Uma vez em que a IA te deu algo ruim ou errado: o que era, como você percebeu, e o que fez no lugar
+
+A IA me deu algumas sugestões ruins durante meus código e prompts iniciais, pois estava tentando escolher um melhor caminho para salvar as informações mas eu acabei não gostando muito do que ela sugeriu. Por exemplo, ela sugeriu que eu usasse localStorage para armazenar o token JWT, mas eu preferi usar cookie HttpOnly. O motivo é que cookie HttpOnly é mais seguro, tinha visto um video recentemente sobre segurança na web, e então quis testar e aplicar o conhecimento que adquiri neste projeto.
+
+### Uma decisão que você tomou contra a sugestão da IA, e o motivo
+
+Uma das sugestões que eu fui contra foi sobre qual banco de dados usar, no caso eu preferi utilizar MySQL ao invés de MongoDB, também decidi usar o XAMPP para gerenciar o banco de dados, pois é uma ferramenta que eu já conheço e utilizo em outros projetos, ela inicialmente havia me sugerido usar o MySQL Community Server. Também teve a mudança no formato da tabela que os administradores vão ver a informação dos jogos solicitados, inicialmente o layout estava muito poluído de informações, tive que fazer alterações para deixar ele mais limpo e melhor compreensível.
